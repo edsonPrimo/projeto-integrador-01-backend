@@ -33,7 +33,7 @@
     "start": "node build/index.js",
     "dev": "tsnd --respawn ./src/index.ts"
   },
-  "author": "Victor Municelli Dario <victor@blockforce.in>",
+  "author": "Edson Primo <edson.poj@outlook.com>",
   "license": "UNLICENSED",
   "dependencies": {
     "@fastify/autoload": "^5.1.0",
@@ -45,9 +45,10 @@
     "fastify": "^4.3.0",
     "fastify-cli": "^4.3.0",
     "fastify-plugin": "^4.0.0",
+    "mysql2": "^3.3.1",
     "pino": "^7.11.0",
     "tslib": "^2.4.0",
-    "typeorm": "^0.2.45",
+    "typeorm": "^0.3.16",
     "yup": "^0.32.11"
   },
   "volta": {

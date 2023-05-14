@@ -1,8 +1,24 @@
 version: '3.7'
 
 services:
+  database:
+    image: mysql
+    container_name: pi-01-db
+    restart: always
+    ports:
+      - 3306:3306
+    environment:
+      - MYSQL_DATABASE=pi-01
+      - MYSQL_USER=mysql
+      - MYSQL_PASSWORD=mysql
+      - MYSQL_ROOT_PASSWORD=123456
+    volumes:
+      - mysqlq_data:/var/lib/mysql
   node-infra:
     container_name: node-infra
     build: .
     ports:
       - 8080:8080
+      
+volumes:
+  mysqlq_data:

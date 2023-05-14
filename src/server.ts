@@ -1,16 +1,18 @@
 import path = require('path');
 import AutoLoad from '@fastify/autoload';
 import fastify, { FastifyInstance } from 'fastify';
-import log from './utils/log';
+import { getLogger } from './utils/log';
 import { loadConfig } from './config';
+import * as db from './db';
 
 export async function initServer(opts = {}): Promise<FastifyInstance> {
   const server = fastify({
-    logger: log,
+    logger: getLogger(),
     maxParamLength: 108,
   });
 
   loadConfig();
+  await db.getDbConnection();
 
   // This loads all plugins defined in plugins
   // those should be support plugins that are reused

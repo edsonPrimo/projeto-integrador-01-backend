@@ -1,37 +1,41 @@
-import * as typeorm from 'typeorm';
+import { globalConfig } from '../config';
+import { getLogger } from '../utils/log';
+import { DataSource } from 'typeorm';
 
-type DbType = 'mysql' | 'postgres';
+let connection: DataSource;
 
-export async function connect() {
-  const dbType = process.env.DB_URL.split(':')[0] as DbType;
-  return await typeorm.createConnection({
-    type: (process.env.DB_TYPE as DbType) || dbType,
-    entities: [__dirname + '/models/*.[tj]s'],
-    synchronize: true,
-    url: process.env.DB_URL,
-    database: process.env.DB,
-    logging: process.env.DB_LOG === 'true',
-    ssl: true,
-  });
-}
-
-export async function getDbConnection(): Promise<typeorm.Connection> {
-  let connection;
-  try {
-    connection = typeorm.getConnection();
-  } catch (e) {
-    if (e.message.indexOf('not found') < 0) {
-      throw e;
-    }
+export async function getDbConnection() {
+  if (!connection) {
+    connection = new DataSource({
+      type: globalConfig.database.type
+        ? (globalConfig.database.type as 'mysql')
+        : (globalConfig.database.url.split(':')[0] as 'mysql'),
+      entities: [__dirname + '/models/*.[tj]s'],
+      synchronize: false,
+      url: globalConfig.database.url,
+      database:
+        globalConfig.database.database ?? globalConfig.database.database,
+      logging: globalConfig.database.log,
+      connectTimeout: 30000,
+      acquireTimeout: 30000,
+      migrations: ['src/db/migrations/*.ts'],
+    });
   }
-  if (!connection || !connection.isConnected) {
-    connection = await connect();
+  if (!connection.isInitialized) {
+    await connection.initialize();
   }
+
+  connection.runMigrations();
   return connection;
 }
 export function getManager() {
-  return typeorm.getManager();
+  return connection.manager;
 }
 export function getRepository(entityClass) {
-  return typeorm.getRepository(entityClass);
+  return connection.getRepository(entityClass);
+}
+
+export async function checkDbConnection() {
+  const conn = await getDbConnection();
+  getLogger().info(`DB connected: ${conn.isInitialized}`);
 }
