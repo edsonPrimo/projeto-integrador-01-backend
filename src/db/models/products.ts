@@ -9,9 +9,9 @@ import {
 } from 'typeorm';
 
 @Entity({
-  name: 'users',
+  name: 'products',
 })
-export default class User {
+export default class Product {
   @PrimaryColumn('uuid')
   @Generated('uuid')
   id: string;
@@ -19,16 +19,14 @@ export default class User {
   @Column({ type: 'varchar', nullable: false })
   name: string;
 
-  @Column({
-    type: 'enum',
-    nullable: false,
-    default: 'client',
-    enum: ['client', 'admin'],
-  })
-  role: ['client' | 'admin'];
+  @Column({ type: 'varchar', nullable: false })
+  sku: string;
 
   @Column({ type: 'varchar', nullable: false })
-  email: string;
+  value: string;
+
+  @Column({ type: 'varchar', nullable: true })
+  picture: string;
 
   @CreateDateColumn()
   createdAt: Date;

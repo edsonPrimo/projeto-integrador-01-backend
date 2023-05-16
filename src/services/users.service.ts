@@ -2,7 +2,7 @@ import { QueryDeepPartialEntity } from 'typeorm/query-builder/QueryPartialEntity
 import { getRepository } from '../db';
 import User from '../db/models/users';
 import { InternalError } from '../utils/error';
-import { UserDto } from '../controllers/users.controller/dtos/user.dto';
+import { CreateUserDto } from '../controllers/users.controller/dtos/user.dto';
 
 class UserService {
   private getRepository() {
@@ -22,13 +22,9 @@ class UserService {
     }
   }
 
-  async createUser(input: UserDto) {
+  async createUser(input: CreateUserDto) {
     const { email, name } = input;
-    const user = await this.insertDb({ name, email });
-
-    
-
-
+    return this.insertDb({ name, email });
   }
 }
 

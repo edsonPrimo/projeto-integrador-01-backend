@@ -2,6 +2,7 @@ import dotenv from 'dotenv';
 import dotenvExpand from 'dotenv-expand';
 
 export const globalConfig = {
+  jwtSecret: '',
   port: 8000,
   database: {
     url: '',
@@ -24,4 +25,5 @@ export function loadConfig() {
     type: 'mysql',
     log: true,
   };
+  globalConfig.jwtSecret = process.env.JWT_SECRET;
 }
