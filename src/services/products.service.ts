@@ -1,7 +1,7 @@
 import { QueryDeepPartialEntity } from 'typeorm/query-builder/QueryPartialEntity';
 import { getRepository } from '../db';
 import { InternalError } from '../utils/error';
-import { CreateProductDto } from '../controllers/products.controller/dtos/products.dto';
+import { ProductDto } from '../controllers/products.controller/dtos/products.dto';
 import Product from '../db/models/products';
 
 class ProductsService {
@@ -22,7 +22,7 @@ class ProductsService {
     }
   }
 
-  async createProduct(input: CreateProductDto) {
+  async createProduct(input: ProductDto) {
     const { name, picture, sku, value } = input;
     return this.insertDb({ name, picture, sku, value });
   }
@@ -40,6 +40,14 @@ class ProductsService {
     });
 
     return products as Product[];
+  }
+
+  async updateProduct(id: string, input: ProductDto): Promise<{ id: string }> {
+    const result = await this.getRepository().update(id, input);
+    if (result.affected !== 1) {
+      throw InternalError('Could not update error, try again later');
+    }
+    return { id };
   }
 }
 

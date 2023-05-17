@@ -30,6 +30,12 @@ export default class User {
   @Column({ type: 'varchar', nullable: false })
   email: string;
 
+  @Column({ type: 'varchar', nullable: false })
+  birthDate: string;
+
+  @Column({ type: 'varchar', nullable: false })
+  phone: string;
+
   @CreateDateColumn()
   createdAt: Date;
 

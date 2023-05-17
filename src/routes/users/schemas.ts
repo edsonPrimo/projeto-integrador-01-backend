@@ -5,6 +5,8 @@ export const CreateUserSchema = {
     .object({
       name: yup.string().required(),
       email: yup.string().required(),
+      phone: yup.string().required(),
+      birthDate: yup.string().required(),
     })
     .required(),
 };

@@ -2,7 +2,7 @@ import { QueryDeepPartialEntity } from 'typeorm/query-builder/QueryPartialEntity
 import { getRepository } from '../db';
 import User from '../db/models/users';
 import { InternalError } from '../utils/error';
-import { CreateUserDto } from '../controllers/users.controller/dtos/user.dto';
+import { UserDto } from '../controllers/users.controller/dtos/user.dto';
 
 class UserService {
   private getRepository() {
@@ -22,9 +22,16 @@ class UserService {
     }
   }
 
-  async createUser(input: CreateUserDto) {
-    const { email, name } = input;
-    return this.insertDb({ name, email });
+  async createUser(input: UserDto) {
+    return this.insertDb(input);
+  }
+
+  async updateUser(id: string, input: UserDto): Promise<{ id: string }> {
+    const result = await this.getRepository().update(id, input);
+    if (result.affected !== 1) {
+      throw InternalError('Could not update error, try again later');
+    }
+    return { id };
   }
 }
 

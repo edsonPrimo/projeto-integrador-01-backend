@@ -25,3 +25,14 @@ export const GetProductsSchema = {
     limit: yup.number().optional(),
   }),
 };
+
+export const UpdateProductSchema = {
+  body: yup
+    .object({
+      name: yup.string().nullable(),
+      picture: yup.string().nullable(),
+      value: yup.string().nullable(),
+      sku: yup.string().nullable(),
+    })
+    .required(),
+};
