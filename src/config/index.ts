@@ -3,6 +3,7 @@ import dotenvExpand from 'dotenv-expand';
 
 export const globalConfig = {
   jwtSecret: '',
+  jwtIssuerKey: '',
   port: 8000,
   database: {
     url: '',
@@ -26,4 +27,5 @@ export function loadConfig() {
     log: true,
   };
   globalConfig.jwtSecret = process.env.JWT_SECRET;
+  globalConfig.jwtIssuerKey = process.env.JWT_ISSUER_KEY
 }

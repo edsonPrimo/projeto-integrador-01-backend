@@ -7,6 +7,14 @@ export const CreateUserSchema = {
       email: yup.string().required(),
       phone: yup.string().required(),
       birthDate: yup.string().required(),
+      password: yup.string().required(),
     })
     .required(),
+};
+
+export const AuthenticateUserSchema = {
+  body: yup.object({
+    email: yup.string().email().required(),
+    password: yup.string().required(),
+  }),
 };

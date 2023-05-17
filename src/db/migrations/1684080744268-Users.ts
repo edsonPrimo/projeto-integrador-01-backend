@@ -25,6 +25,11 @@ export class Users1684080744268 implements MigrationInterface {
             length: '40',
           },
           {
+            name: 'password',
+            type: 'varchar',
+            length: '255',
+          },
+          {
             name: 'birthDate',
             type: 'varchar',
             length: '12',
@@ -37,7 +42,7 @@ export class Users1684080744268 implements MigrationInterface {
           {
             name: 'email',
             type: 'varchar',
-            length: '255',
+            length: '40',
             isUnique: true,
           },
           {
