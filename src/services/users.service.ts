@@ -1,6 +1,6 @@
 import { QueryDeepPartialEntity } from 'typeorm/query-builder/QueryPartialEntity';
 import { getRepository } from '../db';
-import User from '../db/models/users';
+import User from '../db/models/user';
 import { AppError, InternalError } from '../utils/error';
 import { UserDto } from '../controllers/users.controller/dtos/user.dto';
 import bcrypt from 'bcrypt';

@@ -1,7 +1,7 @@
 import { FastifyRequest } from 'fastify';
 import productsService from '../../services/products.service';
 import { ProductDto } from './dtos/products.dto';
-import Product from '../../db/models/products';
+import Product from '../../db/models/product';
 
 export async function createProduct(req: FastifyRequest): Promise<Product> {
   return productsService.createProduct(req.body as ProductDto);
@@ -17,9 +17,12 @@ export async function getProducts(req: FastifyRequest): Promise<Product[]> {
   return productsService.getProducts(offset, limit);
 }
 
-export async function updateProduct(
-  req: FastifyRequest,
-): Promise<{ id: string }> {
+export async function updateProduct(req: FastifyRequest): Promise<{ id: string }> {
   const { id } = req.params as { id: string };
   return productsService.updateProduct(id, req.body as ProductDto);
+}
+
+export async function deleteProduct(req: FastifyRequest): Promise<{ id: string }> {
+  const { id } = req.params as { id: string };
+  return productsService.deleteProduct(id);
 }

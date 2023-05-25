@@ -20,13 +20,13 @@ export default class Product {
   name: string;
 
   @Column({ type: 'varchar', nullable: false })
-  sku: string;
-
-  @Column({ type: 'varchar', nullable: false })
   value: string;
 
   @Column({ type: 'varchar', nullable: true })
   picture: string;
+
+  @Column({ type: 'varchar', nullable: true })
+  description: string;
 
   @CreateDateColumn()
   createdAt: Date;

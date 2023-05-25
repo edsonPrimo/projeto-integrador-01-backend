@@ -1,9 +1,9 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { FastifyInstance } from 'fastify';
 
-import { CreateProductSchema, GetProductByIdSchema, GetProductsSchema, UpdateProductSchema } from './schemas';
+import { CreateProductSchema, DeleteProductSchema, GetProductByIdSchema, GetProductsSchema, UpdateProductSchema } from './schemas';
 import { validateSchema } from '../../validations/schemas';
-import { createProduct, getProductById, getProducts, updateProduct } from '../../controllers/products.controller';
+import { createProduct, deleteProduct, getProductById, getProducts, updateProduct } from '../../controllers/products.controller';
 import { authenticate } from '../../middlewares/authenticate.middleware';
 
 export default async function (fastify: FastifyInstance): Promise<void> {
@@ -25,4 +25,6 @@ export default async function (fastify: FastifyInstance): Promise<void> {
     },
     updateProduct,
   );
+  fastify.delete('/:id', validateSchema(DeleteProductSchema), deleteProduct);
+
 }

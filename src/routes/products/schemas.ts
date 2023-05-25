@@ -6,12 +6,20 @@ export const CreateProductSchema = {
       name: yup.string().required(),
       picture: yup.string().required(),
       value: yup.string().required(),
-      sku: yup.string().required(),
+      description: yup.string().required()
     })
     .required(),
 };
 
 export const GetProductByIdSchema = {
+  params: yup
+    .object({
+      id: yup.string().required(),
+    })
+    .required(),
+};
+
+export const DeleteProductSchema = {
   params: yup
     .object({
       id: yup.string().required(),
@@ -32,7 +40,6 @@ export const UpdateProductSchema = {
       name: yup.string().nullable(),
       picture: yup.string().nullable(),
       value: yup.string().nullable(),
-      sku: yup.string().nullable(),
     })
     .required(),
 };
