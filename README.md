@@ -1,10 +1,10 @@
 # Projeto Integrador 01 - Backend
 
-Este é o repositório do projeto integrador 01 - backend. Ele contém o código fonte e os recursos relacionados ao backend do projeto.
+Este é o repositório do projeto integrador 01 da faculdade Univesp. Ele contém o código fonte e os recursos relacionados ao backend do projeto.
 
 ## Descrição
 
-O projeto integrador 01 é uma aplicação web desenvolvida como parte do curso X. O backend é responsável por fornecer as funcionalidades e a lógica de negócio para a aplicação.
+O projeto integrador 01 é uma aplicação web desenvolvida como parte do curso Analise e Desenvolvimento de Sistemas. O backend é responsável por fornecer as funcionalidades e a lógica de negócio para a aplicação.
 
 ## Recursos
 
